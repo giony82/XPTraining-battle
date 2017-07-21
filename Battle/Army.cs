@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Battle
 {
@@ -9,14 +7,19 @@ namespace Battle
     {
         public Army()
         {
-            Soldiers=new List<Soldier>();
-        }
-        public void AddSoldiers(IList<Soldier> soldiers)
-        {
-           Soldiers.AddRange(soldiers);
+            Soldiers = new List<Soldier>();
         }
 
         public List<Soldier> Soldiers { get; }
+
+        public void AddSoldiers(IList<Soldier> soldiers)
+        {
+            Soldiers.AddRange(soldiers);
+        }
+
+        public void RemoveSoldier(Soldier soldier)
+        {
+        }
 
         public Soldier GetFrontMan()
         {
