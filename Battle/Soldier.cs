@@ -4,7 +4,7 @@ namespace Battle
 {
     public interface IAttacker
     {
-        bool IsAttacker();
+        Soldier GetAttacker(Soldier s1, Soldier s2);
     }
 
     public class Soldier
@@ -35,13 +35,14 @@ namespace Battle
 
         public string Name { get; }
 
-        public bool Fight(Soldier enemy, IAttacker attacker)
+        public Soldier Fight(Soldier enemy, IAttacker attacker)
         {
             if (Weapon.Damage == enemy.Weapon.Damage)
             {
-                return attacker.IsAttacker();
+                return attacker.GetAttacker(this,enemy);
             }
-            return Weapon.Damage > enemy.Weapon.Damage;
+
+            return Weapon.Damage > enemy.Weapon.Damage ? this : enemy;
         }
     }
 }
