@@ -16,6 +16,16 @@ namespace Battle
             soldier.Name.Should().Be("name");
         }
 
+        [Fact]
+        public void Solider_whenAttacksAnotherSolider_ShouldWin()
+        {
+            Soldier john=new Soldier("john");
+            Soldier smith=new Soldier("smith");
+            var result=john.Fight(smith);
+
+            result.Should().Be(true);
+        }
+
         [Theory]
         [InlineData("")]
         [InlineData("        ")]

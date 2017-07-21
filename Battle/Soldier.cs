@@ -23,5 +23,16 @@ namespace Battle
         private bool IsBlank(string name) => string.IsNullOrEmpty(name?.Trim());
         
         public string Name { get; }
+
+        public bool Fight(Soldier enemy)
+        {
+            bool isAtacker = new Random().Next(1,2) % 2 == 0;
+
+            if (_weapon.Damage == enemy._weapon.Damage)
+            {
+                return isAtacker;
+            }
+            return _weapon.Damage > enemy._weapon.Damage;
+        }
     }
 }
