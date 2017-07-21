@@ -9,7 +9,7 @@ namespace Battle
         {
             ValidateNameisNotBlank(name);
             Name = name;
-            _weapon=new Weapon() {Type = Weapon.EWeaponType.BareFirst};
+            _weapon=new Weapon() {Type = Weapon.EWeaponType.BareFist};
         }
 
         private void ValidateNameisNotBlank(string name)
