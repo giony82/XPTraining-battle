@@ -4,10 +4,12 @@ namespace Battle
 {
     public class Soldier
     {
+        private Weapon _weapon;
         public Soldier(string name)
         {
             ValidateNameisNotBlank(name);
             Name = name;
+            _weapon=new Weapon() {Type = Weapon.EWeaponType.BareFirst};
         }
 
         private void ValidateNameisNotBlank(string name)
