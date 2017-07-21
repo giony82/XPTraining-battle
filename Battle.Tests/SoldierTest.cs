@@ -10,6 +10,7 @@ namespace Battle
         [Fact]
         public void construction_ASoldierMustHaveAName()
         {
+            // test commit
             Soldier soldier = new Soldier("name");
 
             soldier.Name.Should().Be("name");
