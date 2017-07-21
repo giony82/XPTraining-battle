@@ -1,4 +1,5 @@
 using System;
+using FakeItEasy;
 using Xunit;
 using FluentAssertions;
 
@@ -17,11 +18,55 @@ namespace Battle
         }
 
         [Fact]
-        public void Solider_whenAttacksAnotherSolider_ShouldWin()
+        public void Soldier_InvalidWeaponTypeTest()
         {
-            Soldier john=new Soldier("john");
-            Soldier smith=new Soldier("smith");
-            var result=john.Fight(smith);
+            Soldier john = new Soldier("john");
+            john.Weapon.Type = (Weapon.EWeaponType)100;
+
+            Assert.Throws<Exception>(() => john.Weapon.Damage);
+        }
+
+        [Fact]
+        public void Soldier_whenAttacksAnotherSoldier_ShouldWin()
+        {
+            Soldier john = new Soldier("john");
+            Soldier smith = new Soldier("smith");
+
+            john.Weapon.Type = Weapon.EWeaponType.Axe;
+            smith.Weapon.Type = Weapon.EWeaponType.BareFist;
+
+            var result = john.Fight(smith,A.Fake<IAttacker>());
+
+            result.Should().Be(true);
+        }
+
+        [Fact]
+        public void Soldier_whenAttacksAnotherSoldier_ShouldLose()
+        {
+            Soldier john = new Soldier("john");
+            Soldier smith = new Soldier("smith");
+
+            john.Weapon.Type = Weapon.EWeaponType.BareFist;
+            smith.Weapon.Type = Weapon.EWeaponType.Axe;
+
+            var result = john.Fight(smith, A.Fake<IAttacker>());
+
+            result.Should().Be(false);
+        }
+
+        [Fact]
+        public void Soldier_whenCombatantsMatchedAttackerWins()
+        {
+            Soldier john = new Soldier("john");
+            Soldier smith = new Soldier("smith");
+
+            john.Weapon.Type = Weapon.EWeaponType.BareFist;
+            smith.Weapon.Type = Weapon.EWeaponType.BareFist;
+
+            var attacker = A.Fake<IAttacker>();
+            A.CallTo(() => attacker.IsAttacker()).Returns(true);
+
+            bool result = john.Fight(smith, attacker);
 
             result.Should().Be(true);
         }

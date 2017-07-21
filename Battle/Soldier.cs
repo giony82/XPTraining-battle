@@ -2,6 +2,11 @@ using System;
 
 namespace Battle
 {
+    public interface IAttacker
+    {
+        bool IsAttacker();
+    }
+
     public class Soldier
     {
         public Weapon Weapon { get; }
@@ -30,15 +35,13 @@ namespace Battle
 
         public string Name { get; }
 
-        public bool Fight(Soldier enemy)
+        public bool Fight(Soldier enemy, IAttacker attacker)
         {
-            bool isAtacker = new Random().Next(1,2) % 2 == 0;
-
-            if (_weapon.Damage == enemy._weapon.Damage)
+            if (Weapon.Damage == enemy.Weapon.Damage)
             {
-                return isAtacker;
+                return attacker.IsAttacker();
             }
-            return _weapon.Damage > enemy._weapon.Damage;
+            return Weapon.Damage > enemy.Weapon.Damage;
         }
     }
 }

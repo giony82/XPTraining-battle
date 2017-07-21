@@ -1,4 +1,6 @@
-﻿namespace Battle
+﻿using System;
+
+namespace Battle
 {
     public class Weapon
     {
@@ -17,15 +19,16 @@
                 switch (Type)
                 {
                     case EWeaponType.Axe:
-                        break;
+                        return 3;
                     case EWeaponType.Sword:
-                        break;
+                        return 2;
                     case EWeaponType.Spear:
-                        break;
+                        return 2;
                     case EWeaponType.BareFist:
-                        break;
+                        return 1;
                 }
-                return 0;
+
+                throw new Exception("Invalid weapon type specified "+Type);
             }
         }
 
